@@ -4,15 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.pkasemer.malai.Models.UserModel;
-import com.pkasemer.malai.SplashActivity;
-
-import java.lang.reflect.Type;
-import java.util.List;
-
-
+import com.pkasemer.malai.Authentication;
 
 
 public class SharedPrefManager {
@@ -98,7 +91,7 @@ public class SharedPrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        Intent intent = new Intent(mCtx, SplashActivity.class);
+        Intent intent = new Intent(mCtx, Authentication.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         mCtx.startActivity(intent);
     }
