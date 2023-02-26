@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="CircularProgress" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">#FF0F43</item>
+    </style>
+
+    <style name="whiteProgress">
+        <item name="colorAccent">#FFFFFF</item>
+    </style>
+
+    <style name="BottomNavigationView">
+        <item name="fontFamily">@font/lexend_light</item>
+    </style>
+
+
+    <style name="AppSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColorPrimary">#1C0F1E</item>
+        <item name="fontFamily">@font/lexend_medium</item>
+        <item name="android:tint">#9C27B0</item>
+    </style>
+
+    <style name="LocalSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:textSize">15sp</item>
+        <item name="hintTextColor">#FFFFFF</item>
+        <item name="android:textColorHint">#FFD700</item>
+        <item name="fontFamily">@font/lexend_medium</item>
+        <item name="android:hint"></item>
+        <item name="android:tint">#68498F</item>
+        <item name="android:textColor">#CFCFCF</item>
+    </style>
+
+    <style name="TabLayoutStyle" parent="Widget.Material3.TabLayout">
+        <item name="fontFamily">@font/lexend_bold</item>
+        <item name="backgroundColor">@color/primary_color</item>
+    </style>
+
+
+    <style name="WhiteBtn" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimaryDark">#FFFFFF</item>
+        <item name="colorAccent">#FFFFFF</item>
+    </style>
+
+
+
+    <style name="Theme.SplashTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary_color</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/pk</item>
+        <item name="postSplashScreenTheme">@style/Theme.MalAI</item>
+    </style>
+
+    <style name="customSeekbar" parent="Widget.AppCompat.SeekBar">
+        <item name="android:minHeight">2dp</item>
+        <item name="android:maxHeight">4dp</item>
+    </style>
+
+</resources>

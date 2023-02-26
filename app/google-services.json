@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1094116765471",
+    "firebase_url": "https://mal-ai-d9d69-default-rtdb.firebaseio.com",
+    "project_id": "mal-ai-d9d69",
+    "storage_bucket": "mal-ai-d9d69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094116765471:android:ef5185cd4939a4a7adca2a",
+        "android_client_info": {
+          "package_name": "com.pkasemer.malai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094116765471-679gt3nfrkihmdt6fs3hac9061j9fes3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0afF4ZjjApHJzZzSgHBf3nEsK4VQxpO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094116765471-3f83dgflliha70vn1j9fdujlnrvs2i03.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
