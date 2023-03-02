@@ -9,4 +9,11 @@
     <color name="rootbg">#9C27B0</color>
     <color name="text_on_green">#D5FFFFFF</color>
     <color name="text_heading">#ffffff</color>
+
+    <color name="input_colors">#131313</color>
+    <color name="input_bg">#F3F3F3</color>
+    <color name="input_hints">#196999</color>
+    <color name="input_hint2">#196999</color>
+    <color name="user_bg_not_selected">#A599DA</color>
+
 </resources>

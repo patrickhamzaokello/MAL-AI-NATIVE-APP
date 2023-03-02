@@ -14,24 +14,7 @@
         android:layout_height="match_parent"
         >
 
-        <RelativeLayout
-            android:id="@+id/bigcircle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
 
-            <ImageView
-                android:id="@+id/upercircle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="-60dp"
-                android:layout_marginRight="-200dp"
-                android:src="@drawable/ic_component_2__1_" />
-
-        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/bigcirclebottom"
@@ -69,7 +52,7 @@
                 android:layout_below="@+id/splashimage"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/lexend_black"
+                android:fontFamily="@font/lexend_bold"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:text="MAL AI"
@@ -82,10 +65,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/introtext"
                 android:layout_marginHorizontal="20dp"
-                android:fontFamily="@font/lexend_black"
+                android:fontFamily="@font/lexend_regular"
                 android:gravity="center"
                 android:includeFontPadding="false"
-                android:text="Malaria Diagnosis App Using AI"
+                android:text="Detecting Malaria through AI Technology"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 

@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Mal AI</string>
-    <string name="learnmore">learn more</string>
-    <string name="continue_agree">continue to agree</string>
+    <string name="learnmore">Learn more about us from our website www.malai.com</string>
+    <string name="continue_agree">By continuing, you indicate that you agree to our terms &amp; condition involved</string>
 </resources>
