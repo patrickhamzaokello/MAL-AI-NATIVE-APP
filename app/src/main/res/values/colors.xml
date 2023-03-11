@@ -14,7 +14,9 @@
     <color name="input_hints">#196999</color>
     <color name="input_hint2">#196999</color>
     <color name="user_bg_not_selected">#A599DA</color>
-    <color name="navigationcolors">#B9E4E4</color>
     <color name="main_bg">#FFFFFF</color>
+    <color name="nav_unselected">#A7DEFF</color>
+    <color name="selected_menu">#FFEB3B</color>
+    <color name="settingsColor">#B0E1FF</color>
 
 </resources>

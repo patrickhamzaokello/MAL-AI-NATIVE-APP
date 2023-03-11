@@ -3,28 +3,28 @@
     <item
         android:id="@+id/navigation_home"
         android:enabled="true"
-        android:icon="@drawable/ic_carbon_email"
+        android:icon="@drawable/fluent_home_24_regular"
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_search"
+        android:id="@+id/navigation_analyze"
         android:enabled="true"
-        android:icon="@drawable/ic_carbon_email"
+        android:icon="@drawable/tabler_analyze"
         android:title="@string/analyze" />
     <item
-        android:id="@+id/navigation_podcast"
+        android:id="@+id/navigation_report"
         android:enabled="true"
-        android:icon="@drawable/ic_carbon_email"
+        android:icon="@drawable/fluent_mdl2_poll_results"
         android:title="@string/title_search" />
     <item
-        android:id="@+id/navigation_events"
+        android:id="@+id/navigation_notification"
         android:enabled="true"
-        android:icon="@drawable/ic_carbon_email"
+        android:icon="@drawable/carbon_event_schedule"
         android:title="@string/title_events" />
     <item
-        android:id="@+id/navigation_library"
+        android:id="@+id/navigation_settings"
         android:enabled="true"
-        android:icon="@drawable/ic_carbon_email"
+        android:icon="@drawable/gg_profile"
         android:title="@string/title_library" />
 
 </menu>

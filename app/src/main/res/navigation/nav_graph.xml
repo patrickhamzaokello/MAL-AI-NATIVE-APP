@@ -9,33 +9,33 @@
     <fragment
         android:id="@+id/navigation_home"
         android:label="@string/title_home"
-        android:name="com.pkasemer.malai.Fragments.Home"
+        android:name="com.pkasemer.malai.Fragments.HomeFragment"
         tools:layout="@layout/fragment_home" >
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_cart"
-        android:name="com.pkasemer.malai.Fragments.Home"
-        tools:layout="@layout/fragment_home"
+        android:id="@+id/navigation_analyze"
+        android:name="com.pkasemer.malai.Fragments.AnalyzeFragment"
+        tools:layout="@layout/fragment_analyze"
         android:label="@string/analyze" />
 
     <fragment
-        android:id="@+id/navigation_search"
-        android:name="com.pkasemer.malai.Fragments.Home"
-        tools:layout="@layout/fragment_home"
+        android:id="@+id/navigation_report"
+        android:name="com.pkasemer.malai.Fragments.ReportFragment"
+        tools:layout="@layout/fragment_report"
         android:label="@string/title_search"
         />
 
     <fragment
-        android:id="@+id/navigation_profile"
-        android:name="com.pkasemer.malai.Fragments.Home"
-        tools:layout="@layout/fragment_home"
+        android:id="@+id/navigation_notification"
+        android:name="com.pkasemer.malai.Fragments.NotificationFragment"
+        tools:layout="@layout/fragment_notification"
         android:label="@string/title_events" />
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.pkasemer.malai.Fragments.Home"
-        tools:layout="@layout/fragment_home"
+        android:name="com.pkasemer.malai.Fragments.SettingsFragment"
+        tools:layout="@layout/fragment_settings"
         android:label="@string/title_library" />
 
 

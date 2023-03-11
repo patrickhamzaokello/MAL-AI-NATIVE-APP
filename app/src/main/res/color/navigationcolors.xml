@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:state_pressed="true"
+        android:color="@color/nav_unselected"/> <!-- pressed -->
+    <item android:state_focused="true"
+        android:color="@color/nav_unselected"/>
+    <item android:state_selected="true"
+        android:color="@color/selected_menu"/>
+
+    <item android:state_enabled="true"
+        android:color="@color/nav_unselected"/>
+    <!-- focused -->
+    <item android:color="@color/nav_unselected"/> <!-- default -->
+</selector>

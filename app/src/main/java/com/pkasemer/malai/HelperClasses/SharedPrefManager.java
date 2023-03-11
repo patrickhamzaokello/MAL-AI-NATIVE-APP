@@ -11,7 +11,7 @@ import com.pkasemer.malai.Authentication;
 public class SharedPrefManager {
 
     //the constants
-    private static final String SHARED_PREF_NAME = "mwonya_shared_pref";
+    private static final String SHARED_PREF_NAME = "malai_shared_pref";
     private static final String KEY_ID = "KEY_ID";
     private static final String KEY_FULL_NAME = "KEY_FULL_NAME";
     private static final String KEY_USERNAME = "KEY_USERNAME";
