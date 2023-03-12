@@ -73,29 +73,19 @@ public class MainActivity extends AppCompatActivity {
 
 
             if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, "ACCESS_FINE_LOCATION granted", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "ACCESS_FINE_LOCATION denied", Toast.LENGTH_SHORT).show();
             }
             if(grantResults[1]== PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, "ACCESS_COARSE_LOCATION granted", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "ACCESS_COARSE_LOCATION denied", Toast.LENGTH_SHORT).show();
             }
             if(grantResults[2]== PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, "CAMERA granted", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "CAMERA denied", Toast.LENGTH_SHORT).show();
             }
             if(grantResults[3]== PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, "READ_EXTERNAL_STORAGEgranted", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "READ_EXTERNAL_STORAGE denied", Toast.LENGTH_SHORT).show();
             }
             if(grantResults[4]== PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, "WRITE_EXTERNAL_STORAGE granted", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "WRITE_EXTERNAL_STORAGE denied", Toast.LENGTH_SHORT).show();
             }
         }
     }

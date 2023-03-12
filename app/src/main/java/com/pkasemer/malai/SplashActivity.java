@@ -7,10 +7,8 @@ import android.os.Handler;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -19,7 +17,7 @@ public class SplashActivity extends AppCompatActivity {
     SharedPreferences onboarding_sharedPreferences;
 
     Animation topAnim, bottomAnim;
-    TextView introtext, secondintrotext,endfootertext;
+    TextView introtext, secondintrotext, endfootertext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
 
         introtext = findViewById(R.id.introtext);
         secondintrotext = findViewById(R.id.secondintrotext);
-        endfootertext= findViewById(R.id.endfootertext);
+        endfootertext = findViewById(R.id.endfootertext);
 
         introtext.setAnimation(topAnim);
         secondintrotext.setAnimation(bottomAnim);
@@ -45,19 +43,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                onboarding_sharedPreferences = getSharedPreferences("onBoardingScreen", MODE_PRIVATE);
-                boolean isFirstTime = onboarding_sharedPreferences.getBoolean("firstTime", true);
-
-                if(isFirstTime){
-                    SharedPreferences.Editor editor = onboarding_sharedPreferences.edit();
-                    editor.putBoolean("firstTime", false);
-                    editor.commit();
-                    Intent intent = new Intent(SplashActivity.this, OnBoarding.class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(SplashActivity.this, Authentication.class);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(SplashActivity.this, Authentication.class);
+                startActivity(intent);
                 finish();
 
 
