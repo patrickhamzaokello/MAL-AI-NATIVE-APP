@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -41,9 +42,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.canhub.cropper.CropImage;
+import com.canhub.cropper.CropImageView;
 import com.github.drjacky.imagepicker.ImagePicker;
 import com.github.drjacky.imagepicker.constant.ImageProvider;
 import com.google.android.material.textfield.TextInputEditText;
+import com.pkasemer.malai.CaptureImageActivity;
 import com.pkasemer.malai.MainActivity;
 import com.pkasemer.malai.R;
 
@@ -68,12 +72,11 @@ public class AnalyzeFragment extends Fragment {
     private static final int CROP_REQUEST = 2;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
-    LinearLayout submit_btn;
+    LinearLayout uploadImageBtn, submit_btn;
 
     View view;
     private String[] PERMISSIONS;
 
-    TextView captureTxt;
     String path;
     Uri imageUri;
     ImageView captureImage;
@@ -98,16 +101,18 @@ public class AnalyzeFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_analyze, container, false);
         submit_btn = view.findViewById(R.id.submit_btn);
-        captureTxt = view.findViewById(R.id.idEventBrowse);
+        uploadImageBtn = view.findViewById(R.id.uploadImage);
         captureImage = view.findViewById(R.id.my_avator);
 
 
-        captureTxt.setOnClickListener(new View.OnClickListener() {
+        uploadImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                cameraIntent.putExtra("android.intent.extras.CAMERA_FACING", 1);
                 imageUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                cameraIntent.putExtra("return-data", true);
                 startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
 
             }
@@ -155,34 +160,11 @@ public class AnalyzeFragment extends Fragment {
 
 
     private void uploadFile() {
+        Intent intent = new Intent(getActivity(), CaptureImageActivity.class);
+        startActivity(intent);
     }
 
-    private void cropImage(Uri uri) {
-        CropImage.activity(uri)
-                .setAspectRatio(1, 1)
-                .setOutputCompressQuality(100)
-                .start(this);
-    }
 
-    private void saveImage(Bitmap bitmap) {
-        String folderPath = Environment.getExternalStorageDirectory() + "/Kasfa";
-        Log.d("URIk", "saveImage: " + folderPath);
-        File folder = new File(folderPath);
-        if (!folder.exists()) {
-            folder.mkdirs();
-        }
-        String imagePath = folderPath + System.currentTimeMillis() + ".png";
-        File imageFile = new File(imagePath);
-        try {
-            FileOutputStream fos = new FileOutputStream(imageFile);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            fos.flush();
-            fos.close();
-            Toast.makeText(getContext(), "Image saved to " + imagePath, Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private void displayImage(Bitmap bitmap) {
         captureImage.setImageBitmap(bitmap);
@@ -194,27 +176,13 @@ public class AnalyzeFragment extends Fragment {
         Log.d("URIk", "onActivityResult: " + requestCode);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             if (imageUri != null) {
-                cropImage(imageUri);
+//                cropImage(imageUri);
+                Toast.makeText(getContext(), "Image Saved", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getContext(), "Image capture failed", Toast.LENGTH_SHORT).show();
             }
 
-        } else if (requestCode == CROP_REQUEST && resultCode == RESULT_OK) {
-
-            if (imageUri != null) {
-                Log.d("URIk", "cropActivity: " + requestCode);
-                try {
-                    // Get the cropped image from the specified URI
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), imageUri);
-                    saveImage(bitmap);
-                    displayImage(bitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Toast.makeText(getContext(), "Crop Image failed", Toast.LENGTH_SHORT).show();
-            }
-        }
+        } 
     }
 
 

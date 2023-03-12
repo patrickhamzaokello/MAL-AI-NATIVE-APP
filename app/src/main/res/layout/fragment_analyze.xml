@@ -60,6 +60,41 @@
                 app:layout_constraintTop_toBottomOf="@id/heading" />
 
 
+            <LinearLayout
+                android:id="@+id/uploadImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/rounded_btn_bg"
+                android:backgroundTint="#FFFFFF"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/subheading">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/malanalyze"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lexend_light"
+                    android:text="Take Sample Image"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -73,13 +108,6 @@
             app:layout_constraintTop_toBottomOf="@+id/analyeParentHead">
 
 
-            <TextView
-                android:id="@+id/idEventBrowse"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:padding="5dp"
-                android:text="Image" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -106,11 +134,10 @@
 
                 <ImageView
                     android:id="@+id/my_avator"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_below="@id/idEventBrowse"
-                    android:src="@drawable/ic_launcher" />
+                    android:layout_width="300dp"
+                    android:layout_height="225dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/malimagesize_default" />
 
 
             </RelativeLayout>
