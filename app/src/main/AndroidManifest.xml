@@ -32,10 +32,10 @@
         </intent>
         <intent>
             <action android:name="android.intent.action.PICK" />
+
             <data android:mimeType="vnd.android.cursor.dir/image" />
         </intent>
     </queries>
-
 
     <application
         android:allowBackup="true"
@@ -48,6 +48,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute"
         tools:replace="android:icon">
+        <activity
+            android:name=".CropperActivity"
+            android:exported="false" />
         <activity
             android:name=".CaptureImageActivity"
             android:exported="false" />
@@ -77,11 +80,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".SplashActivity"
             android:exported="true"

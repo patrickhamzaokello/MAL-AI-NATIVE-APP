@@ -48,6 +48,7 @@ import com.github.drjacky.imagepicker.ImagePicker;
 import com.github.drjacky.imagepicker.constant.ImageProvider;
 import com.google.android.material.textfield.TextInputEditText;
 import com.pkasemer.malai.CaptureImageActivity;
+import com.pkasemer.malai.CropperActivity;
 import com.pkasemer.malai.MainActivity;
 import com.pkasemer.malai.R;
 
@@ -83,6 +84,8 @@ public class AnalyzeFragment extends Fragment {
 
     private static final int MEDIA_TYPE_IMAGE = 1;
     private static final int MEDIA_TYPE_VIDEO = 2;
+
+    ActivityResultLauncher<String> mGetContent;
 
     public AnalyzeFragment() {
         // Required empty public constructor
@@ -122,9 +125,20 @@ public class AnalyzeFragment extends Fragment {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadFile();
+                mGetContent.launch("image/*");
             }
         });
+
+        mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                Intent intent = new Intent(getContext(), CropperActivity.class);
+                intent.putExtra("DATA", result.toString());
+                startActivityForResult(intent, 101);
+
+            }
+        });
+
         return view;
     }
 
@@ -159,31 +173,34 @@ public class AnalyzeFragment extends Fragment {
     }
 
 
-    private void uploadFile() {
-        Intent intent = new Intent(getActivity(), CaptureImageActivity.class);
-        startActivity(intent);
-    }
-
-
-
-    private void displayImage(Bitmap bitmap) {
-        captureImage.setImageBitmap(bitmap);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("URIk", "onActivityResult: " + requestCode);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             if (imageUri != null) {
-//                cropImage(imageUri);
+                Intent intent = new Intent(getContext(), CropperActivity.class);
+                intent.putExtra("DATA", imageUri.toString());
+                startActivityForResult(intent, 101);
                 Toast.makeText(getContext(), "Image Saved", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getContext(), "Image capture failed", Toast.LENGTH_SHORT).show();
             }
+        }
+        if(resultCode==-1 && requestCode==101){
+            String result = data.getStringExtra("RESULT");
+            Uri resultUri = null;
+            if(result != null){
+                resultUri = Uri.parse(result);
+                captureImage.setImageURI(resultUri);
+            }
 
-        } 
+
+        }
+
     }
+
+
 
 
 }
