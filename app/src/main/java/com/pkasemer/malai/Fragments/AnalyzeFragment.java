@@ -58,6 +58,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -166,10 +167,31 @@ public class AnalyzeFragment extends Fragment {
             return null;
         }
 
-        // Get the content:// URI for the file using FileProvider
         Uri fileUri = FileProvider.getUriForFile(requireActivity(), getString(R.string.fileprovider), mediaFile);
 
         return fileUri;
+    }
+
+    private void SaveImagetoFile(Uri image){
+        // Define the output directory for the cropped image
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "Kasfa");
+
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.e("Kasfa", "Failed to create directory");
+            }
+        }
+        Log.d("destK", "onCreate: "+image);
+
+        // Save the cropped image to the "Kasfa" directory in the "Pictures" directory on external storage
+        try (OutputStream out = new FileOutputStream(new File(mediaStorageDir, "scropped_image.png"))) {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), image);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -193,6 +215,7 @@ public class AnalyzeFragment extends Fragment {
             if(result != null){
                 resultUri = Uri.parse(result);
                 captureImage.setImageURI(resultUri);
+                SaveImagetoFile(resultUri);
             }
 
 

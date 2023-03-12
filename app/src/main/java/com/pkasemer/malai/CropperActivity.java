@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.yalantis.ucrop.UCrop;
 import com.yalantis.ucrop.UCropActivity;
@@ -24,16 +25,17 @@ public class CropperActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cropper);
         readIntent();
 
-        String dest_uri = new StringBuilder(UUID.randomUUID().toString()).append(".jpg").toString();
+        String dest_uri = new StringBuilder(UUID.randomUUID().toString()).append(".png").toString();
 
         UCrop.Options options = new UCrop.Options();
 //        options.setCircleDimmedLayer(true);
         options.setShowCropFrame(true);
         options.setShowCropGrid(true);
-        options.setCompressionFormat(Bitmap.CompressFormat.PNG);
-        options.setCompressionQuality(100);
+//        options.setCompressionFormat(Bitmap.CompressFormat.PNG);
+//        options.setCompressionQuality(100);
         options.setAllowedGestures(UCropActivity.ROTATE,UCropActivity.SCALE,UCropActivity.SCALE);
 
+        Log.d("destK", "onCreate: "+dest_uri);
 
         UCrop.of(fileUri,Uri.fromFile(new File(getCacheDir(),dest_uri)))
                 .withOptions(options)
