@@ -41,6 +41,9 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'com.squareup.moshi:moshi:1.9.3'
+    implementation 'com.github.Drjacky:ImagePicker:2.3.22'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    implementation 'com.android.support:exifinterface:28.0.0'
 
     //recyclerview animators
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
