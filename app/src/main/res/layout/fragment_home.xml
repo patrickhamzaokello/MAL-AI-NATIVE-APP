@@ -32,7 +32,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="50dp"
                 android:fontFamily="@font/lexend_bold"
-                android:text="Welcome,"
+                android:text="Welcome To,"
                 android:textColor="#6AC7FF"
                 android:textSize="40sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:fontFamily="@font/lexend_bold"
-                android:text="Gilbert Rukundo"
+                android:text="Mal AI"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
 
 
             <TextView
-                android:id="@+id/heading_num"
+                android:id="@+id/heading_num1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -103,7 +103,7 @@
                 />
 
             <TextView
-                android:id="@+id/heading"
+                android:id="@+id/heading1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -114,12 +114,12 @@
                 android:textSize="25sp"
                 android:transitionName="logo_text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/heading_num"
+                app:layout_constraintTop_toBottomOf="@id/heading_num1"
 
                 />
 
             <TextView
-                android:id="@+id/subheading"
+                android:id="@+id/subheading1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -130,7 +130,7 @@
                 android:textSize="18sp"
                 android:transitionName="logo_desc"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/heading" />
+                app:layout_constraintTop_toBottomOf="@id/heading1" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -152,7 +152,7 @@
 
 
             <TextView
-                android:id="@+id/heading_num"
+                android:id="@+id/heading_num2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -168,7 +168,7 @@
                 />
 
             <TextView
-                android:id="@+id/heading"
+                android:id="@+id/heading2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -179,12 +179,12 @@
                 android:textSize="25sp"
                 android:transitionName="logo_text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/heading_num"
+                app:layout_constraintTop_toBottomOf="@id/heading_num2"
 
                 />
 
             <TextView
-                android:id="@+id/subheading"
+                android:id="@+id/subheading2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -195,7 +195,7 @@
                 android:textSize="18sp"
                 android:transitionName="logo_desc"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/heading" />
+                app:layout_constraintTop_toBottomOf="@id/heading2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

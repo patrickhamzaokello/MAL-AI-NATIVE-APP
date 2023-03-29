@@ -51,7 +51,7 @@
                 android:id="@+id/patientinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Patient: Monica Auma, Patient ID: #902MAl32232"
+                android:text="Patient ID: #902MAl32232"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/heading"
