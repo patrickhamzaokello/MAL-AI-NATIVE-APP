@@ -10,6 +10,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -74,7 +75,7 @@ public class AnalyzeFragment extends Fragment {
     private static final int CROP_REQUEST = 2;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
-    LinearLayout uploadImageBtn, submit_btn;
+    LinearLayout uploadImageBtn, submit_btn,analyebtn;
 
     View view;
     private String[] PERMISSIONS;
@@ -107,6 +108,7 @@ public class AnalyzeFragment extends Fragment {
         submit_btn = view.findViewById(R.id.submit_btn);
         uploadImageBtn = view.findViewById(R.id.uploadImage);
         captureImage = view.findViewById(R.id.my_avator);
+        analyebtn = view.findViewById(R.id.analyebtn);
 
 
         uploadImageBtn.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +121,14 @@ public class AnalyzeFragment extends Fragment {
                 cameraIntent.putExtra("return-data", true);
                 startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
 
+            }
+        });
+
+        analyebtn.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.inactivebtn)));
+        analyebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Missing Trained Model", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -216,6 +226,7 @@ public class AnalyzeFragment extends Fragment {
                 resultUri = Uri.parse(result);
                 captureImage.setImageURI(resultUri);
                 SaveImagetoFile(resultUri);
+                analyebtn.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.activebtn)));
             }
 
 

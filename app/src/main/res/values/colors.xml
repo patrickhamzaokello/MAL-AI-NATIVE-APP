@@ -8,7 +8,8 @@
     <color name="user_bg">#196999</color>
     <color name="text_on_green">#D5FFFFFF</color>
     <color name="text_heading">#ffffff</color>
-
+    <color name="inactivebtn">#D5B1B1B1</color>
+    <color name="activebtn">#E91E63</color>
     <color name="input_colors">#131313</color>
     <color name="input_bg">#F3F3F3</color>
     <color name="input_hints">#196999</color>
