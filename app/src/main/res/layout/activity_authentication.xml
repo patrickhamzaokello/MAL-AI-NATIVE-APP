@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/user_bg"
+    android:background="@color/primary_color"
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:scaleType="fitXY"
@@ -24,7 +24,7 @@
             android:id="@+id/mwonya_word"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/lexend_bold"
+            android:fontFamily="@font/poppinsbold"
             android:text="Mal Ai"
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="@color/text_heading"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="30dp"
-            android:fontFamily="@font/lexend_light"
+            android:fontFamily="@font/poppinslight"
             app:layout_constraintTop_toBottomOf="@+id/mwonya_word"
             android:includeFontPadding="false"
             android:text="Welcome to MalAI! Take a photo of your blood sample to predict malaria."
@@ -79,8 +79,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Continue with Google"
-                android:fontFamily="@font/lexend_light"
-                android:textColor="@color/user_bg"
+                android:fontFamily="@font/poppinslight"
+                android:textColor="@color/primary_color"
                 android:textSize="15sp"/>
 
         </LinearLayout>
@@ -112,8 +112,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sign up with Email"
-                android:fontFamily="@font/lexend_light"
-                android:textColor="@color/user_bg"
+                android:fontFamily="@font/poppinslight"
+                android:textColor="@color/primary_color"
                 android:textSize="15sp"/>
 
         </LinearLayout>
@@ -144,8 +144,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Login with Password"
-                android:fontFamily="@font/lexend_light"
-                android:textColor="@color/user_bg"
+                android:fontFamily="@font/poppinslight"
+                android:textColor="@color/primary_color"
                 android:textSize="15sp"/>
 
         </LinearLayout>
@@ -157,7 +157,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:fontFamily="@font/lexend_regular"
+            android:fontFamily="@font/poppinsregular"
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@+id/login_screen"
             android:text="@string/continue_agree"
@@ -169,7 +169,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:fontFamily="@font/lexend_regular"
+            android:fontFamily="@font/poppinsregular"
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@+id/agreement"
             android:text="@string/learnmore"

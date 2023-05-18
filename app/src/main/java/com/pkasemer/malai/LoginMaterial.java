@@ -39,8 +39,8 @@ public class LoginMaterial extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_material);
-        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.user_bg));
-        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.user_bg));
+        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.primary_color));
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.primary_color));
         //if the user is already logged in we will directly start the profile activity
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             finish();

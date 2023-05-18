@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:backgroundTint="@color/input_hints"
+        android:backgroundTint="@color/primary_color"
         android:text="Gallery"
         android:textColor="@color/input_bg"
         app:layout_constraintStart_toEndOf="@id/cameraBtn"

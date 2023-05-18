@@ -56,8 +56,8 @@ public class Authentication extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
 
-        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.user_bg));
-        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.user_bg));
+        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.primary_color));
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.primary_color));
 
         if (SharedPrefManager.getInstance(getApplicationContext()).isLoggedIn()) {
             Intent intent = new Intent(this, MainActivity.class);

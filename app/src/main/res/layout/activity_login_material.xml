@@ -17,6 +17,7 @@
         android:layout_centerVertical="true"
         android:layout_centerInParent="true"
         android:paddingBottom="40dp"
+        android:layout_gravity="center"
         >
 
         <LinearLayout
@@ -32,9 +33,10 @@
                 android:id="@+id/login_welcomeback"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Login"
                 android:textAlignment="center"
+                android:layout_gravity="center"
                 android:textColor="@color/primary_color"
                 android:textSize="35sp"
                 android:transitionName="logo_text"
@@ -46,10 +48,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/lexend_regular"
+                android:fontFamily="@font/poppinsregular"
                 android:includeFontPadding="false"
                 android:text="Log in to MalAI to get started"
                 android:textAlignment="center"
+                android:layout_gravity="center"
                 android:textColor="@color/primary_color"
                 android:textSize="22sp"
                 android:transitionName="logo_desc" />
@@ -68,13 +71,13 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Username / Email"
-                    android:textColorHint="@color/input_hint2"
+                    android:hint="Email"
+                    android:textColorHint="@color/primary_color"
                     android:transitionName="username_input"
                     app:boxStrokeColor="@color/input_colors"
                     app:boxStrokeErrorColor="@color/input_colors"
-                    app:endIconTint="@color/input_hints"
-                    app:hintTextColor="@color/input_hints">
+                    app:endIconTint="@color/primary_color"
+                    app:hintTextColor="@color/primary_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputTextUsername"
@@ -82,7 +85,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/input_bg"
                         android:inputType="textAutoComplete"
-                        android:fontFamily="@font/lexend_light"
+                        android:fontFamily="@font/poppinslight"
                         android:textColor="@color/input_colors" />
 
 
@@ -95,14 +98,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:hint="Password"
-                    android:textColorHint="@color/input_hint2"
+                    android:textColorHint="@color/primary_color"
                     android:transitionName="password_input"
                     app:boxStrokeColor="@color/input_colors"
                     app:boxStrokeErrorColor="@color/input_colors"
-                    app:endIconTint="@color/input_hints"
-                    app:hintTextColor="@color/input_hints"
+                    app:endIconTint="@color/primary_color"
+                    app:hintTextColor="@color/primary_color"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/input_hints">
+                    app:passwordToggleTint="@color/primary_color">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputTextPassword"
@@ -110,7 +113,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/input_bg"
                         android:inputType="textPassword"
-                        android:fontFamily="@font/lexend_light"
+                        android:fontFamily="@font/poppinslight"
                         android:textColor="@color/input_colors"
                         app:endIconTint="@color/input_colors"
 
@@ -147,7 +150,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Login to Mal Ai"
-                        android:fontFamily="@font/lexend_light"
+                        android:fontFamily="@font/poppinslight"
                         android:textColor="@color/white"
                         android:textSize="15sp"/>
 
@@ -163,7 +166,7 @@
                     android:textColor="@color/primary_color"
                     android:transitionName="account_change"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:fontFamily="@font/lexend_light"
+                    android:fontFamily="@font/poppinslight"
                     app:strokeColor="@color/primary_color"
                     app:strokeWidth="1dp" />
 
@@ -178,7 +181,7 @@
                     android:transitionName="account_change"
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:strokeColor="@color/user_bg"
+                    app:strokeColor="@color/primary_color"
                     app:strokeWidth="1dp" />
 
 
@@ -188,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:fontFamily="@font/lexend_regular"
+                android:fontFamily="@font/poppinsregular"
                 android:gravity="center"
                 android:text="@string/continue_agree"
                 android:textColor="@color/text_on_green"
@@ -198,7 +201,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/lexend_regular"
+                android:fontFamily="@font/poppinsregular"
                 android:gravity="center"
                 android:text="@string/learnmore"
                 android:textColor="@color/text_on_green"

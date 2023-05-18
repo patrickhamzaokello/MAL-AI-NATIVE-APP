@@ -20,7 +20,7 @@
             android:id="@+id/heading_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/settings_background"
+            android:background="@drawable/home_background"
             android:paddingBottom="40dp"
             app:layout_constraintTop_toTopOf="parent"
             >
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="50dp"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Welcome To,"
                 android:textColor="#6AC7FF"
                 android:textSize="40sp"
@@ -44,7 +44,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Mal AI"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp"
@@ -55,6 +55,77 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+            android:id="@+id/uploadImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/rounded_btn_bg"
+            android:backgroundTint="#4CAF50"
+            android:clickable="true"
+            android:elevation="2dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/submit_btn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heading_home">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/malanalyze"
+                app:tint="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinslight"
+                android:text="Start New Session"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/submit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_btn_bg"
+            android:backgroundTint="#2196F3"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/uploadImage"
+            app:layout_constraintTop_toTopOf="@+id/uploadImage">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/clarity_image_gallery_line"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppinslight"
+                android:text="Gallery"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
 
 
         <TextView
@@ -62,14 +133,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:fontFamily="@font/lexend_regular"
+            android:fontFamily="@font/poppinsregular"
             android:text="Here is the latest summaries for you. we are working on making MAL AI better everyday."
             android:textColor="@color/primary_color"
             android:textSize="20sp"
             android:layout_marginVertical="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/heading_home" />
+            app:layout_constraintTop_toBottomOf="@id/uploadImage" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/analyeParentHead"
@@ -91,11 +162,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/poppinsbold"
                 android:includeFontPadding="false"
-                android:text="50k"
+                android:text="New Session"
                 android:textColor="#FFFFFF"
-                android:textSize="45sp"
+                android:textSize="35sp"
                 android:transitionName="logo_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -107,7 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/poppinsbold"
                 android:includeFontPadding="false"
                 android:text="Total Image samples analyzed."
                 android:textColor="#6DFFFFFF"
@@ -123,7 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/lexend_regular"
+                android:fontFamily="@font/poppinsregular"
                 android:includeFontPadding="false"
                 android:text="(~20k) Positive, (~30k) Negative"
                 android:textColor="#43FFFFFF"
@@ -156,11 +227,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/poppinsbold"
                 android:includeFontPadding="false"
-                android:text="91.7%"
+                android:text="Gallery"
                 android:textColor="@color/primary_color"
-                android:textSize="45sp"
+                android:textSize="35sp"
                 android:transitionName="logo_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -172,7 +243,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/poppinsbold"
                 android:includeFontPadding="false"
                 android:text="Training Accuracy"
                 android:textColor="@color/primary_color"
@@ -188,7 +259,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/lexend_regular"
+                android:fontFamily="@font/poppinsregular"
                 android:includeFontPadding="false"
                 android:text="This model was trained on 5Million Images and the upcoming versions will even be more powerful"
                 android:textColor="#171717"
@@ -220,7 +291,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/poppinsbold"
                 android:includeFontPadding="false"
                 android:text="120k"
                 android:textColor="#FFFFFF"
@@ -236,7 +307,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/poppinsbold"
                 android:includeFontPadding="false"
                 android:text="Sampled Users"
                 android:textColor="#FFFFFF"
@@ -252,7 +323,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/lexend_regular"
+                android:fontFamily="@font/poppinsregular"
                 android:includeFontPadding="false"
                 android:text="(~20k) Registered, (~30k) UnRegistered"
                 android:textColor="#D1F9FF"

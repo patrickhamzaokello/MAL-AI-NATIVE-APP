@@ -12,14 +12,14 @@
     </style>
 
     <style name="BottomNavigationView">
-        <item name="fontFamily">@font/lexend_light</item>
+        <item name="fontFamily">@font/poppinslight</item>
     </style>
 
 
     <style name="AppSearchView" parent="Widget.AppCompat.SearchView">
         <item name="android:textSize">15sp</item>
         <item name="android:textColorPrimary">#1C0F1E</item>
-        <item name="fontFamily">@font/lexend_medium</item>
+        <item name="fontFamily">@font/poppinsmedium</item>
         <item name="android:tint">#9C27B0</item>
     </style>
 
@@ -27,14 +27,14 @@
         <item name="android:textSize">15sp</item>
         <item name="hintTextColor">#FFFFFF</item>
         <item name="android:textColorHint">#FFD700</item>
-        <item name="fontFamily">@font/lexend_medium</item>
+        <item name="fontFamily">@font/poppinsmedium</item>
         <item name="android:hint"></item>
         <item name="android:tint">#68498F</item>
         <item name="android:textColor">#CFCFCF</item>
     </style>
 
     <style name="TabLayoutStyle" parent="Widget.Material3.TabLayout">
-        <item name="fontFamily">@font/lexend_bold</item>
+        <item name="fontFamily">@font/poppinsbold</item>
         <item name="backgroundColor">@color/primary_color</item>
     </style>
 
