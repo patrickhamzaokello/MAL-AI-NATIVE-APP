@@ -26,11 +26,7 @@
         android:label="@string/title_search"
         />
 
-    <fragment
-        android:id="@+id/navigation_notification"
-        android:name="com.pkasemer.malai.Fragments.NotificationFragment"
-        tools:layout="@layout/fragment_notification"
-        android:label="@string/title_events" />
+
 
     <fragment
         android:id="@+id/navigation_settings"

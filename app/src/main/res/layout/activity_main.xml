@@ -36,7 +36,7 @@
         app:labelVisibilityMode="labeled"
         android:paddingTop="8dp"
         android:elevation="20dp"
-        android:background="@color/primary_color"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

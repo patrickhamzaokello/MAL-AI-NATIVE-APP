@@ -13,8 +13,9 @@
     <color name="input_bg">#F3F3F3</color>
     <color name="user_bg_not_selected">#A599DA</color>
     <color name="main_bg">#FFFFFF</color>
-    <color name="nav_unselected">#5CC1A6</color>
-    <color name="selected_menu">#FFEB3B</color>
+    <color name="nav_unselected">#77000000</color>
+    <color name="selected_menu">#FFFFFF</color>
     <color name="settingsColor">#B0E1FF</color>
+    <color name="background_green">#F1FBF8</color>
 
 </resources>

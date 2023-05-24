@@ -14,13 +14,9 @@
     <item
         android:id="@+id/navigation_report"
         android:enabled="true"
-        android:icon="@drawable/fluent_mdl2_poll_results"
+        android:icon="@drawable/clarity_image_gallery_line"
         android:title="@string/title_search" />
-    <item
-        android:id="@+id/navigation_notification"
-        android:enabled="true"
-        android:icon="@drawable/carbon_event_schedule"
-        android:title="@string/title_events" />
+
     <item
         android:id="@+id/navigation_settings"
         android:enabled="true"

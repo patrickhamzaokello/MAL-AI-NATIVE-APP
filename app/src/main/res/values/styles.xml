@@ -12,7 +12,7 @@
     </style>
 
     <style name="BottomNavigationView">
-        <item name="fontFamily">@font/poppinslight</item>
+        <item name="fontFamily">@font/poppinsbold</item>
     </style>
 
 

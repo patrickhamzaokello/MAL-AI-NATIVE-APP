@@ -4,29 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background_green"
     tools:context=".Fragments.AnalyzeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/analyeParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
+        android:background="@drawable/rounded_card"
+        android:backgroundTint="#fff"
+        android:layout_margin="20dp"
+        android:paddingBottom="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/analyeParentHead"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/settings_background"
-            android:paddingHorizontal="40dp"
-            android:paddingVertical="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
 
             <TextView
@@ -38,7 +29,7 @@
                 android:includeFontPadding="false"
                 android:text="New Image Sample"
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="#B5000000"
                 android:textSize="25sp"
                 android:transitionName="logo_text"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,36 +38,169 @@
 
                 />
 
-            <TextView
-                android:id="@+id/patientinfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Patient ID: #902MAl32232"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/heading"
-                android:textColor="@color/white"
-                android:fontFamily="@font/poppinsregular"
-                android:textSize="18sp"
-                android:layout_marginTop="8dp"
-                android:textAlignment="center"
 
-                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/login_fullname"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:hint="Slide ID"
+                android:layout_marginHorizontal="20dp"
+                android:textColorHint="@color/black"
+                android:transitionName="username_input"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeErrorColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/heading"
+                app:endIconTint="@color/black"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextFullname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppinslight"
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/site"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Site"
+                android:layout_marginHorizontal="20dp"
+                android:textColorHint="@color/black"
+                android:transitionName="username_input"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeErrorColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/login_fullname"
+                app:endIconTint="@color/black"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/entersite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppinslight"
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/date"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Date"
+                android:layout_marginHorizontal="20dp"
+                android:textColorHint="@color/black"
+                android:transitionName="username_input"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeErrorColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/site"
+                app:endIconTint="@color/black"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/enterdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppinslight"
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/age"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Age"
+                android:layout_marginHorizontal="20dp"
+                android:textColorHint="@color/black"
+                android:transitionName="username_input"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeErrorColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/date"
+                app:endIconTint="@color/black"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/enterage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppinslight"
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sex"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Sex"
+                android:layout_marginHorizontal="20dp"
+                android:textColorHint="@color/black"
+                android:transitionName="username_input"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeErrorColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/age"
+                app:endIconTint="@color/black"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/entersex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppinslight"
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/subheading"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppinslight"
                 android:includeFontPadding="false"
                 android:text="Upload image from gallery or use phone camera to capture sample image"
-                android:textColor="@color/settingsColor"
+                android:textColor="#B5000000"
                 android:textSize="15sp"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:textAlignment="center"
                 android:transitionName="logo_desc"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/patientinfo" />
+                app:layout_constraintTop_toBottomOf="@id/sex" />
 
 
             <LinearLayout
@@ -151,7 +275,6 @@
             </LinearLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
@@ -163,14 +286,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/analyeParentHead">
+            app:layout_constraintTop_toBottomOf="@+id/submit_btn">
 
 
 
 
-
-
-            
             <RelativeLayout
                 android:layout_width="350dp"
                 android:layout_height="250dp"
@@ -202,6 +322,7 @@
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
+                android:elevation="2dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="@dimen/edge_val"
                 android:orientation="horizontal"
@@ -225,6 +346,80 @@
                     android:fontFamily="@font/poppinslight"
                     android:text="Analyze Image"
                     android:textColor="#FFFFFF"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/savebtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_btn_bg"
+                android:backgroundTint="#2196F3"
+                android:clickable="true"
+                android:elevation="2dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="@dimen/edge_val"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/uploadImage"
+                app:layout_constraintTop_toTopOf="@+id/uploadImage">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/clarity_image_gallery_line"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinslight"
+                    android:text="Save Image"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/retakebtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_btn_bg"
+                android:backgroundTint="#585A5E"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:elevation="2dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="@dimen/edge_val"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/uploadImage"
+                app:layout_constraintTop_toTopOf="@+id/uploadImage">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/malanalyze"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinslight"
+                    android:text="Retake Image"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
             </LinearLayout>
