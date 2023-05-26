@@ -1,13 +1,16 @@
 package com.pkasemer.malai.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.pkasemer.malai.ImageDisplayActivity;
 import com.pkasemer.malai.R;
 
 import java.io.File;
@@ -58,6 +61,23 @@ public class ImageAdapter extends BaseAdapter {
                 .load(imageFile)
                 .into(imageView);
 
+        // Set click listener for the image
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImage(imageFile);
+            }
+        });
+
         return imageView;
+    }
+
+
+    private void showImage(File imageFile) {
+        Toast.makeText(context, "Image Clicked", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(context, ImageDisplayActivity.class);
+        intent.putExtra("IMAGE_PATH", imageFile.getAbsolutePath());
+        context.startActivity(intent);
     }
 }

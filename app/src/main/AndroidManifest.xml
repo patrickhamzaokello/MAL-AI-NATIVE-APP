@@ -49,6 +49,9 @@
         tools:ignore="UnusedAttribute"
         tools:replace="android:icon">
         <activity
+            android:name=".ImageDisplayActivity"
+            android:exported="false" />
+        <activity
             android:name=".CropperActivity"
             android:exported="false" />
         <activity

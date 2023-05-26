@@ -3,6 +3,8 @@
     <dimen name="dim_status_bar">30dp</dimen>
     <dimen name="edge_val">14dp</dimen>
     <dimen name="water_mark">250dp</dimen>
-    <dimen name="image_size_x">640dp</dimen>
-    <dimen name="image_size_y">480dp</dimen>
+<!--    <dimen name="image_size_x">640dp</dimen>-->
+<!--    <dimen name="image_size_y">480dp</dimen>-->
+    <dimen name="image_size_x">130dp</dimen>
+    <dimen name="image_size_y">130dp</dimen>
 </resources>
