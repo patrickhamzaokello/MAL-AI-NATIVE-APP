@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/navigation_report"
-        android:name="com.pkasemer.malai.Fragments.ReportFragment"
+        android:name="com.pkasemer.malai.Fragments.GalleryFragment"
         tools:layout="@layout/fragment_report"
         android:label="@string/title_search"
         />

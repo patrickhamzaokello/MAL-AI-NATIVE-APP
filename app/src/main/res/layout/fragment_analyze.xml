@@ -204,7 +204,7 @@
 
 
             <LinearLayout
-                android:id="@+id/uploadImage"
+                android:id="@+id/Camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
@@ -217,7 +217,7 @@
                 android:orientation="horizontal"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp"
-                app:layout_constraintEnd_toStartOf="@+id/submit_btn"
+                app:layout_constraintEnd_toStartOf="@+id/gallery_take"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
@@ -241,7 +241,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/submit_btn"
+                android:id="@+id/gallery_take"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_btn_bg"
@@ -254,8 +254,8 @@
                 android:paddingVertical="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/uploadImage"
-                app:layout_constraintTop_toTopOf="@+id/uploadImage">
+                app:layout_constraintStart_toEndOf="@+id/Camera"
+                app:layout_constraintTop_toTopOf="@+id/Camera">
 
                 <ImageView
                     android:layout_width="25dp"
@@ -286,7 +286,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/submit_btn">
+            app:layout_constraintTop_toBottomOf="@+id/gallery_take">
 
 
 
