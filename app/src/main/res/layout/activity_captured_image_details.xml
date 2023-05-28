@@ -260,10 +260,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinslight"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Save Image"
                 android:textColor="#FFFFFF"
-                android:textSize="15sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -297,10 +297,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinslight"
+                android:fontFamily="@font/poppinsbold"
                 android:text="Retake Image"
                 android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 

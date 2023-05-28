@@ -57,9 +57,10 @@ public class GalleryFragment extends Fragment {
     private ArrayList<File> fetchImageFilesFromFolder() {
         ArrayList<File> imageFiles = new ArrayList<>();
 
-        File mediaStorageDir = new File(getActivity().getFilesDir(), "Mal_Images");
-        if (mediaStorageDir.exists()) {
-            File[] files = mediaStorageDir.listFiles();
+        // Get the destination folder path in internal storage
+        File folder = new File(getContext().getExternalFilesDir(null), "Mal_Images");
+        if (folder.exists() && folder.isDirectory()) {
+            File[] files = folder.listFiles();
             if (files != null) {
                 for (File file : files) {
                     // Add image files to the list
@@ -72,6 +73,7 @@ public class GalleryFragment extends Fragment {
 
         return imageFiles;
     }
+
 
     private boolean isImageFile(File file) {
         String mimeType = URLConnection.guessContentTypeFromName(file.getName());

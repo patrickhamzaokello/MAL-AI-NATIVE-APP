@@ -10,12 +10,16 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.yalantis.ucrop.util.FileUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,12 +30,15 @@ import java.util.Locale;
 
 public class CapturedImageDetails extends AppCompatActivity {
 
+    LinearLayout savebtn, retakebtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_captured_image_details);
 
         ImageView imageView = findViewById(R.id.captured_image);
+        savebtn = findViewById(R.id.savebtn);
+        retakebtn = findViewById(R.id.retakebtn);
 
         String imagePath = getIntent().getStringExtra("CAPTURED_IMAGE_PATH");
         Log.e("imagepaths", "onCreate: "+ imagePath );
@@ -41,52 +48,67 @@ public class CapturedImageDetails extends AppCompatActivity {
         Glide.with(this)
                 .load(imagePath)
                 .into(imageView);
+
+        savebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveCroppedImageToFolder(Uri.parse(imagePath));
+            }
+        });
+
+        retakebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Close the current activity and navigate back to the previous screen
+                finish();
+            }
+        });
     }
 
-
-    private void saveCroppedImageToFolder(Uri croppedUri) {
+    private void saveCroppedImageToFolder(Uri imageUri) {
         try {
-            File mediaStorageDir = new File(this.getFilesDir(), "Mal_Images");
-            if (!mediaStorageDir.exists()) {
-                if (!mediaStorageDir.mkdirs()) {
-                    Log.d("MyApp", "Failed to create directory");
-                    return;
-                }
-            }
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-            File outputFile = new File(mediaStorageDir, "IMG_" + timeStamp + ".jpg");
+            // Create a file object from the image URI
+            File sourceFile = new File(imageUri.getPath());
 
-            InputStream inputStream = getContentResolver().openInputStream(croppedUri);
-            OutputStream outputStream = new FileOutputStream(outputFile);
-
-            byte[] buffer = new byte[4096];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
+            // Get the destination folder path in internal storage
+            File folder = new File(getExternalFilesDir(null), "Mal_Images");
+            if (!folder.exists()) {
+                folder.mkdirs();
             }
 
+            // Create a new file in the destination folder
+            File destinationFile = new File(folder, "cropped_image.jpg");
+
+            // Create input and output streams
+            FileInputStream inputStream = new FileInputStream(sourceFile);
+            FileOutputStream outputStream = new FileOutputStream(destinationFile);
+
+            // Copy the file contents from input stream to output stream
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+            }
+
+            // Close the streams
             outputStream.flush();
             outputStream.close();
             inputStream.close();
 
-            // Hide the image from the gallery
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, outputFile.getName());
-                contentValues.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-                contentValues.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000);
-                contentValues.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
-                contentValues.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/Mal_Images");
-                getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-            }
-            MediaScannerConnection.scanFile(this, new String[]{outputFile.getAbsolutePath()}, null, null);
+            // Scan the newly saved image file so that it appears in the gallery
+            MediaScannerConnection.scanFile(this, new String[]{destinationFile.getPath()}, null, null);
+            Log.e("imagepathss", "saveCroppedImageToFolder: "+  destinationFile.getPath());
 
-            // Image saved successfully
-            Toast.makeText(this, "Image saved successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Image saved to app's internal storage", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle any errors that may occur during image saving
             Toast.makeText(this, "Failed to save image", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
+
+
+
 }

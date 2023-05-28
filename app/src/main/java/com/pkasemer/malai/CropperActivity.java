@@ -28,14 +28,10 @@ public class CropperActivity extends AppCompatActivity {
         String dest_uri = new StringBuilder(UUID.randomUUID().toString()).append(".png").toString();
 
         UCrop.Options options = new UCrop.Options();
-//        options.setCircleDimmedLayer(true);
         options.setShowCropFrame(true);
         options.setShowCropGrid(true);
-//        options.setCompressionFormat(Bitmap.CompressFormat.PNG);
-//        options.setCompressionQuality(100);
         options.setAllowedGestures(UCropActivity.ROTATE,UCropActivity.SCALE,UCropActivity.SCALE);
 
-        Log.d("destK", "onCreate: "+dest_uri);
 
         UCrop.of(fileUri,Uri.fromFile(new File(getCacheDir(),dest_uri)))
                 .withOptions(options)

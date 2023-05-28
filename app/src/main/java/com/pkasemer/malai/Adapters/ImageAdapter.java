@@ -2,6 +2,7 @@ package com.pkasemer.malai.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -75,6 +76,8 @@ public class ImageAdapter extends BaseAdapter {
 
     private void showImage(File imageFile) {
         Toast.makeText(context, "Image Clicked", Toast.LENGTH_SHORT).show();
+
+        Log.e("imagepathssss", "showImage: "+ imageFile );
 
         Intent intent = new Intent(context, ImageDisplayActivity.class);
         intent.putExtra("IMAGE_PATH", imageFile.getAbsolutePath());
