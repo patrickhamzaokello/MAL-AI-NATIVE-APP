@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.pkasemer.malai.Database.DatabaseHelper;
 
 import java.io.File;
 
@@ -32,8 +33,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
 
     Dialog track_dialog;
 
-    TextView gametocytes_value, plasmodium_species_value;
-    Button playTrack;
+    TextView gametocytes_value, plasmodium_species_value,slideID,image_desc;
     ImageButton closebtn, backBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +51,22 @@ public class ImageDisplayActivity extends AppCompatActivity {
         ConstraintLayout dialog_background = track_dialog.findViewById(R.id.dialog_background);
         gametocytes_value = track_dialog.findViewById(R.id.gametocytes_value);
         plasmodium_species_value = track_dialog.findViewById(R.id.plasmodium_species_value);
-        playTrack = track_dialog.findViewById(R.id.playTrack);
+
         closebtn = track_dialog.findViewById(R.id.closebtn);
+        slideID = findViewById(R.id.slideID);
+        image_desc = findViewById(R.id.image_desc);
 
         // Get the image file path or URI from the intent
         imagePath = getIntent().getStringExtra("IMAGE_PATH");
+        Integer image_id = getIntent().getIntExtra("IMAGE_ID",0);
+        Integer slide_age = getIntent().getIntExtra("AGE",0);
+        String slide_id = getIntent().getStringExtra("SLIDE_ID");
+        String slide_gender = getIntent().getStringExtra("GENDER");
+        String site_name = getIntent().getStringExtra("SITE_NAME");
+        DatabaseHelper db = new DatabaseHelper(ImageDisplayActivity.this);
 
+        slideID.setText("SlideID #: "+slide_id);
+        image_desc.setText("Info: "+ slide_gender + " - "+ slide_age+ "Yrs" +", " + site_name );
         // Load the image into the ImageView using Glide or any other image loading library
         Glide.with(this)
                 .load(imagePath)
@@ -83,7 +93,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Get the image file path from the intent
-
+                db.deleteImageData(image_id);
                 // Create a File object for the image file
                 File imageFile = new File(imagePath);
 
@@ -98,6 +108,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
                         Toast.makeText(ImageDisplayActivity.this, "Failed to delete image", Toast.LENGTH_SHORT).show();
                     }
                 }
+                finish();
             }
         });
     }
@@ -111,14 +122,6 @@ public class ImageDisplayActivity extends AppCompatActivity {
                 track_dialog.dismiss();
             }
         });
-
-        playTrack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                track_dialog.dismiss();
-            }
-        });
-
 
         plasmodium_species_value.setText("80%");
         gametocytes_value.setText("30%");

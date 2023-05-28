@@ -1,26 +1,28 @@
 package com.pkasemer.malai.Fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 
-import com.pkasemer.malai.Adapters.ImageAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.pkasemer.malai.Adapters.GalleryAdapter;
+import com.pkasemer.malai.Database.DatabaseHelper;
+import com.pkasemer.malai.HelperClasses.Utility;
+import com.pkasemer.malai.Models.MalSavedImage;
 import com.pkasemer.malai.R;
 
 import java.io.File;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class GalleryFragment extends Fragment {
-
-
-
 
 
     public GalleryFragment() {
@@ -32,22 +34,33 @@ public class GalleryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        imageFiles = fetchImageFilesFromFolder();
-
+//        imageFiles = fetchImageFilesFromFolder();
+        DatabaseHelper db = new DatabaseHelper(getContext());
+        malSavedImageList = db.getSavedImageList(null);
     }
 
-    private GridView gridView;
-    private ImageAdapter imageAdapter;
+    private GalleryAdapter galleryAdapter;
     private ArrayList<File> imageFiles;
+    List<MalSavedImage> malSavedImageList;
+    private RecyclerView itemRecyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_report, container, false);
-        gridView = view.findViewById(R.id.grid_view);
-        imageAdapter = new ImageAdapter(getActivity(), imageFiles);
-        gridView.setAdapter(imageAdapter);
+        itemRecyclerView = (RecyclerView) view.findViewById(R.id.main_recycler);
+
+
+        int mNoOfColumns = Utility.calculateNoOfColumns(getContext(), 150);
+        GridLayoutManager catgridLayoutManager = new GridLayoutManager(getContext(), mNoOfColumns);
+        itemRecyclerView.setLayoutManager(catgridLayoutManager);
+
+        itemRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        galleryAdapter = new GalleryAdapter(getActivity(), malSavedImageList);
+
+        itemRecyclerView.setAdapter(galleryAdapter);
+
 
         // Fetch image files from the folder
 
@@ -74,6 +87,11 @@ public class GalleryFragment extends Fragment {
         return imageFiles;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        galleryAdapter.notifyDataSetChanged();
+    }
 
     private boolean isImageFile(File file) {
         String mimeType = URLConnection.guessContentTypeFromName(file.getName());

@@ -27,7 +27,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.pkasemer.malai.Database.LocalStorage;
 import com.pkasemer.malai.HelperClasses.SharedPrefManager;
 import com.pkasemer.malai.LoginMaterial;
 import com.pkasemer.malai.MalUtils.NetworkStatusIntentService;
@@ -38,7 +37,6 @@ import com.pkasemer.malai.R;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class SettingsFragment extends Fragment {
-    LocalStorage db;
     TextView textViewUsername, textViewEmail, other_info;
     ImageView profile_image;
     ImageButton backbtn;
@@ -98,9 +96,6 @@ public class SettingsFragment extends Fragment {
                             public void onClick(SweetAlertDialog sDialog) {
 
                                 sDialog.dismissWithAnimation();
-                                db = new LocalStorage(getContext());
-                                db.clearDatabases();
-
 
                                 GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                                         .requestIdToken(getString(R.string.default_web_client_id))
