@@ -1,36 +1,31 @@
 package com.pkasemer.malai;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ContentValues;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
-import com.yalantis.ucrop.util.FileUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 public class CapturedImageDetails extends AppCompatActivity {
 
     LinearLayout savebtn, retakebtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +36,7 @@ public class CapturedImageDetails extends AppCompatActivity {
         retakebtn = findViewById(R.id.retakebtn);
 
         String imagePath = getIntent().getStringExtra("CAPTURED_IMAGE_PATH");
-        Log.e("imagepaths", "onCreate: "+ imagePath );
+        Log.e("imagepaths", "onCreate: " + imagePath);
 
 
         // Load the image into the ImageView using Glide or any other image loading library
@@ -76,8 +71,12 @@ public class CapturedImageDetails extends AppCompatActivity {
                 folder.mkdirs();
             }
 
-            // Create a new file in the destination folder
-            File destinationFile = new File(folder, "cropped_image.jpg");
+            // Generate a unique filename using timestamp and random number
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+            String uniqueFileName = "mal_" + timeStamp + "_" + new Random().nextInt(1000) + ".jpg";
+
+            // Create a new file in the destination folder with the unique filename
+            File destinationFile = new File(folder, uniqueFileName);
 
             // Create input and output streams
             FileInputStream inputStream = new FileInputStream(sourceFile);
@@ -97,18 +96,15 @@ public class CapturedImageDetails extends AppCompatActivity {
 
             // Scan the newly saved image file so that it appears in the gallery
             MediaScannerConnection.scanFile(this, new String[]{destinationFile.getPath()}, null, null);
-            Log.e("imagepathss", "saveCroppedImageToFolder: "+  destinationFile.getPath());
 
             Toast.makeText(this, "Image saved to app's internal storage", Toast.LENGTH_SHORT).show();
+            finish();
+
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(this, "Failed to save image", Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
-
 
 
 }
