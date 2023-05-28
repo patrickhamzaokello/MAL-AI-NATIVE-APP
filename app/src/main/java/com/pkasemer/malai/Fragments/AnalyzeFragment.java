@@ -5,6 +5,7 @@ import static android.app.Activity.RESULT_OK;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.database.Cursor;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -25,7 +26,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import com.pkasemer.malai.CapturedImageDetails;
 import com.pkasemer.malai.CropperActivity;
+import com.pkasemer.malai.ImageDisplayActivity;
 import com.pkasemer.malai.R;
 
 import java.io.File;
@@ -44,14 +47,14 @@ public class AnalyzeFragment extends Fragment {
     private static final int REQUEST_CROP_REQUEST = 2;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
-    LinearLayout camera_take, gallery_take, analyebtn;
+    LinearLayout camera_take, gallery_take;
 
     View view;
     private String[] PERMISSIONS;
 
     String path;
     Uri imageUri;
-    ImageView captureImage;
+
 
     private static final int MEDIA_TYPE_IMAGE = 1;
     private static final int MEDIA_TYPE_VIDEO = 2;
@@ -76,8 +79,7 @@ public class AnalyzeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_analyze, container, false);
         gallery_take = view.findViewById(R.id.gallery_take);
         camera_take = view.findViewById(R.id.Camera);
-        captureImage = view.findViewById(R.id.my_avator);
-        analyebtn = view.findViewById(R.id.analyebtn);
+
 
 
         camera_take.setOnClickListener(new View.OnClickListener() {
@@ -92,13 +94,6 @@ public class AnalyzeFragment extends Fragment {
             }
         });
 
-        analyebtn.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.inactivebtn)));
-        analyebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "Missing Trained Model", Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
         gallery_take.setOnClickListener(new View.OnClickListener() {
@@ -146,51 +141,7 @@ public class AnalyzeFragment extends Fragment {
 
     }
 
-    private void saveCroppedImageToFolder(Uri croppedUri) {
-        try {
-            File mediaStorageDir = new File(getContext().getFilesDir(), "Mal_Images");
-            if (!mediaStorageDir.exists()) {
-                if (!mediaStorageDir.mkdirs()) {
-                    Log.d("MyApp", "Failed to create directory");
-                    return;
-                }
-            }
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-            File outputFile = new File(mediaStorageDir, "IMG_" + timeStamp + ".jpg");
 
-            InputStream inputStream = getContext().getContentResolver().openInputStream(croppedUri);
-            OutputStream outputStream = new FileOutputStream(outputFile);
-
-            byte[] buffer = new byte[4096];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
-            }
-
-            outputStream.flush();
-            outputStream.close();
-            inputStream.close();
-
-            // Hide the image from the gallery
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, outputFile.getName());
-                contentValues.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-                contentValues.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000);
-                contentValues.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
-                contentValues.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/Mal_Images");
-                getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-            }
-            MediaScannerConnection.scanFile(getContext(), new String[]{outputFile.getAbsolutePath()}, null, null);
-
-            // Image saved successfully
-            Toast.makeText(getContext(), "Image saved successfully", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle any errors that may occur during image saving
-            Toast.makeText(getContext(), "Failed to save image", Toast.LENGTH_SHORT).show();
-        }
-    }
 
 
     @Override
@@ -206,19 +157,22 @@ public class AnalyzeFragment extends Fragment {
             }
         } else if (resultCode == -1 && requestCode == 101) {
             String result = data.getStringExtra("RESULT");
-            if (result != null) {
+            if (result != null && getContext() != null) {
                 Uri croppedUri = Uri.parse(result);
-                captureImage.setImageURI(croppedUri);
-                analyebtn.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.activebtn)));
-                saveCroppedImageToFolder(croppedUri);
+                Intent intent = new Intent(getContext(), CapturedImageDetails.class);
+                intent.putExtra("CAPTURED_IMAGE_PATH", croppedUri.toString());
+                Log.e("imagepath", "onCreate: " + croppedUri);
+                getContext().startActivity(intent);
             }
 
 
         } else {
-            Toast.makeText(getContext(), "Error saving image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Error Capturing Image", Toast.LENGTH_SHORT).show();
         }
 
     }
+
+
 
 
 }
