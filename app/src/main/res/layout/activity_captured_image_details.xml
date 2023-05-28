@@ -82,35 +82,6 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_fullname"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:hint="Slide ID"
-            android:layout_marginHorizontal="20dp"
-            android:textColorHint="@color/black"
-            android:transitionName="username_input"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeErrorColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/image_layout"
-            app:endIconTint="@color/black"
-            app:hintTextColor="@color/black">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputTextFullname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/black"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:fontFamily="@font/poppinslight"
-                />
-
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/site"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -122,7 +93,7 @@
             android:transitionName="username_input"
             app:boxStrokeColor="@color/black"
             app:boxStrokeErrorColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/login_fullname"
+            app:layout_constraintTop_toBottomOf="@id/image_layout"
             app:endIconTint="@color/black"
             app:hintTextColor="@color/black">
 
@@ -139,34 +110,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/date"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Date"
-            android:layout_marginHorizontal="20dp"
-            android:textColorHint="@color/black"
-            android:transitionName="username_input"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeErrorColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/site"
-            app:endIconTint="@color/black"
-            app:hintTextColor="@color/black">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/enterdate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/black"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:fontFamily="@font/poppinslight"
-                />
-
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/age"
@@ -180,7 +124,7 @@
             android:transitionName="username_input"
             app:boxStrokeColor="@color/black"
             app:boxStrokeErrorColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/date"
+            app:layout_constraintTop_toBottomOf="@id/site"
             app:endIconTint="@color/black"
             app:hintTextColor="@color/black">
 
@@ -189,7 +133,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/black"
-                android:inputType="text"
+                android:inputType="number"
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppinslight"
                 />
@@ -197,34 +141,34 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/sex"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <RadioGroup
+            android:id="@+id/genderRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="Sex"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/age"
+            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="20dp"
-            android:textColorHint="@color/black"
-            android:transitionName="username_input"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeErrorColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/age"
-            app:endIconTint="@color/black"
-            app:hintTextColor="@color/black">
+            >
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/entersex"
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/maleRadioButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/black"
-                android:inputType="text"
+                android:text="Male"
+                android:fontFamily="@font/poppinsbold"
                 android:textColor="@color/black"
-                android:fontFamily="@font/poppinslight"
-                />
+                android:checked="true" />
 
+            <RadioButton
+                android:id="@+id/femaleRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppinsbold"
+                android:text="Female" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        </RadioGroup>
 
 
 
@@ -248,7 +192,7 @@
             android:paddingVertical="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintTop_toBottomOf="@+id/sex">
+            app:layout_constraintTop_toBottomOf="@+id/genderRadioGroup">
 
             <ImageView
                 android:layout_width="25dp"

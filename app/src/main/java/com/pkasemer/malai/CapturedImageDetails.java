@@ -5,13 +5,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,6 +48,23 @@ public class CapturedImageDetails extends AppCompatActivity {
         Glide.with(this)
                 .load(imagePath)
                 .into(imageView);
+
+        // Inside onCreate() method of your activity
+        RadioGroup genderRadioGroup = findViewById(R.id.genderRadioGroup);
+        genderRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                if (checkedId == R.id.maleRadioButton) {
+                    // Male option selected
+                    String gender = "Male";
+                    // Handle the selected gender
+                } else if (checkedId == R.id.femaleRadioButton) {
+                    // Female option selected
+                    String gender = "Female";
+                    // Handle the selected gender
+                }
+            }
+        });
 
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
