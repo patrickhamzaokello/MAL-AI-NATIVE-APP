@@ -57,26 +57,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/poppinsregular"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppinsmedium"
                 android:includeFontPadding="false"
-                android:maxLines="1"
                 android:text="slide ID"
-                android:textColor="@color/primary_color"
-                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/artistname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
                 android:ellipsize="end"
                 android:includeFontPadding="false"
                 android:text="sitename"
-                android:fontFamily="@font/poppinslight"
-                android:textColor="@color/primary_color"
-                android:textSize="10sp" />
+                android:fontFamily="@font/poppinsregular"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
 
         </LinearLayout>
 

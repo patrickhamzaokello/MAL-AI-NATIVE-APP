@@ -7,11 +7,6 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_analyze"
-        android:enabled="true"
-        android:icon="@drawable/tabler_analyze"
-        android:title="@string/analyze" />
-    <item
         android:id="@+id/navigation_report"
         android:enabled="true"
         android:icon="@drawable/clarity_image_gallery_line"

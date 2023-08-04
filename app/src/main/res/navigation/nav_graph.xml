@@ -13,11 +13,7 @@
         tools:layout="@layout/fragment_home" >
     </fragment>
 
-    <fragment
-        android:id="@+id/navigation_analyze"
-        android:name="com.pkasemer.malai.Fragments.AnalyzeFragment"
-        tools:layout="@layout/fragment_analyze"
-        android:label="@string/analyze" />
+
 
     <fragment
         android:id="@+id/navigation_report"

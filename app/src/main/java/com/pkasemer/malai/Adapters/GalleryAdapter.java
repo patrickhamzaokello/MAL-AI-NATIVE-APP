@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -67,8 +66,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ItemView
     @Override
     public void onBindViewHolder(ItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final MalSavedImage malSavedImage = savedImages.get(position);
-        holder.titleView.setText(malSavedImage.getSlide_id());
-        holder.artistname.setText(malSavedImage.getSite_name());
+        holder.titleView.setText("Slide ID  #: "+malSavedImage.getSlide_id());
+        holder.artistname.setText("Name: "+malSavedImage.getSite_name());
         Glide.with(context)
                 .applyDefaultRequestOptions(new RequestOptions()
                         .placeholder(R.drawable.malimagesize_default)

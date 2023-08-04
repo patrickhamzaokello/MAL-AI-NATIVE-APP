@@ -52,7 +52,7 @@ public class GalleryFragment extends Fragment {
         itemRecyclerView = (RecyclerView) view.findViewById(R.id.main_recycler);
 
 
-        int mNoOfColumns = Utility.calculateNoOfColumns(getContext(), 150);
+        int mNoOfColumns = Utility.calculateNoOfColumns(getContext(), 250);
         GridLayoutManager catgridLayoutManager = new GridLayoutManager(getContext(), mNoOfColumns);
         itemRecyclerView.setLayoutManager(catgridLayoutManager);
 
