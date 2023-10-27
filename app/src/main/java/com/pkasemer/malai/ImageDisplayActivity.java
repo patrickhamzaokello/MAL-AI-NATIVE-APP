@@ -3,7 +3,11 @@ package com.pkasemer.malai;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.res.AssetFileDescriptor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -11,7 +15,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,11 +22,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.snackbar.Snackbar;
 import com.pkasemer.malai.Database.DatabaseHelper;
 
+import org.tensorflow.lite.DataType;
+import org.tensorflow.lite.Interpreter;
+import org.tensorflow.lite.support.common.TensorOperator;
+import org.tensorflow.lite.support.common.TensorProcessor;
+import org.tensorflow.lite.support.common.ops.NormalizeOp;
+import org.tensorflow.lite.support.image.ImageProcessor;
+import org.tensorflow.lite.support.image.TensorImage;
+import org.tensorflow.lite.support.image.ops.ResizeOp;
+import org.tensorflow.lite.support.image.ops.ResizeWithCropOrPadOp;
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.util.List;
 
 public class ImageDisplayActivity extends AppCompatActivity {
 
@@ -32,16 +50,32 @@ public class ImageDisplayActivity extends AppCompatActivity {
 
 
     Dialog track_dialog;
+    protected Interpreter tflite;
+    ImageView imageView;
 
     TextView gametocytes_value, plasmodium_species_value,slideID,image_desc;
     ImageButton closebtn, backBtn;
+
+    private int imageSizeX;
+    private int imageSizeY;
+    private TensorImage inputImageBuffer;
+
+    private TensorBuffer outputProbabilityBuffer;
+    private TensorProcessor probabilityProcessor;
+    private static final float IMAGE_MEAN = 0.0f;
+    private static final float IMAGE_STD = 1.0f;
+    private static final float PROBABILITY_MEAN = 0.0f;
+    private static final float PROBABILITY_STD = 255.0f;
+
+    private static Bitmap img_process_bitmap;
+    private List<String> labels;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_display);
 
 
-        ImageView imageView = findViewById(R.id.image_view);
+        imageView = findViewById(R.id.image_view);
         analyebtn = findViewById(R.id.analyebtn);
         delete_sample_btn = findViewById(R.id.delete_sample_btn);
         backBtn = findViewById(R.id.backBtn);
@@ -72,11 +106,22 @@ public class ImageDisplayActivity extends AppCompatActivity {
                 .load(imagePath)
                 .into(imageView);
 
+        try {
+            tflite = new Interpreter(loadModelFile(this));
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+
 
         analyebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDialog("imagePath");
+
+//                    openDialog("imagePath");
+                ProcessImage(view);
             }
         });
 
@@ -114,6 +159,83 @@ public class ImageDisplayActivity extends AppCompatActivity {
     }
 
 
+    private  void ProcessImage(View view){
+        if(imageView.getDrawable() != null){
+            int imageTensorIndex = 0;
+            int[] imageShape = tflite.getInputTensor(imageTensorIndex).shape(); // {1, height, weight, 3}
+            imageSizeX = imageShape[1];
+            imageSizeY = imageShape[2];
+
+            DataType imageDataType = tflite.getInputTensor(imageTensorIndex).dataType();
+
+            int probabilityTensorIndex = 0;
+            int[] probabilityShape = tflite.getOutputTensor(probabilityTensorIndex).shape();
+            DataType probabilityDataType = tflite.getInputTensor(probabilityTensorIndex).dataType();
+
+
+            inputImageBuffer = new TensorImage(imageDataType);
+            outputProbabilityBuffer = TensorBuffer.createFixedSize(probabilityShape, probabilityDataType);
+
+            probabilityProcessor = new TensorProcessor.Builder().add(getPostProcessorNormalizedOP()).build();
+
+
+            inputImageBuffer = loadImageFromPath(imagePath);
+            tflite.run(inputImageBuffer.getBuffer(), outputProbabilityBuffer.getBuffer().rewind());
+
+
+        } else {
+            Snackbar.make(view, "Please Choose Image", Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+
+
+    private TensorImage loadImageFromPath(String imagePath) {
+        // Load the image from the file path
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+
+        if (bitmap == null) {
+            // Handle the case where the image couldn't be loaded from the provided path
+            // You may want to return an error message or handle this case appropriately
+            return null;
+        }
+
+        // Load the bitmap into a TensorImage
+        inputImageBuffer.load(bitmap);
+
+        // Create an image processor for TensorFlow
+        int cropSize = Math.min(bitmap.getWidth(), bitmap.getHeight());
+
+        ImageProcessor imageProcessor = new ImageProcessor.Builder()
+                .add(new ResizeWithCropOrPadOp(cropSize, cropSize))
+                .add(new ResizeOp(imageSizeX, imageSizeY, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR))
+                .add(getPreProcessorNormalizedOP())
+                .build();
+
+        return imageProcessor.process(inputImageBuffer);
+    }
+
+
+    private TensorOperator getPreProcessorNormalizedOP() {
+        return new NormalizeOp(IMAGE_MEAN, IMAGE_STD);
+    }
+
+    private TensorOperator getPostProcessorNormalizedOP() {
+        return new NormalizeOp(PROBABILITY_MEAN, PROBABILITY_STD);
+    }
+
+
+    private MappedByteBuffer loadModelFile(Activity activity)  throws IOException{
+        AssetFileDescriptor fileDescriptor = activity.getAssets().openFd("best_float32.tflite");
+        FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
+        FileChannel fileChannel = inputStream.getChannel();
+        long startOffset = fileDescriptor.getStartOffset();
+        long declareLength = fileDescriptor.getDeclaredLength();
+        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declareLength);
+    }
+
 
     public void openDialog(String ImagePath) {
         closebtn.setOnClickListener(new View.OnClickListener() {
@@ -131,4 +253,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
         track_dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         track_dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
+
+
+
 }
