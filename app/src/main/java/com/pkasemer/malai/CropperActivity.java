@@ -35,8 +35,8 @@ public class CropperActivity extends AppCompatActivity {
 
         UCrop.of(fileUri,Uri.fromFile(new File(getCacheDir(),dest_uri)))
                 .withOptions(options)
-                .withAspectRatio(640,480)
-                .withMaxResultSize(640, 480)
+                .withAspectRatio(640,640)
+                .withMaxResultSize(640, 640)
                 .start(CropperActivity.this);
 
     }

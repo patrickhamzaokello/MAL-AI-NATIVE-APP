@@ -1,8 +1,5 @@
 package com.pkasemer.malai;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.res.AssetFileDescriptor;
@@ -11,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +19,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.pkasemer.malai.Database.DatabaseHelper;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.Interpreter;
+import org.tensorflow.lite.support.common.FileUtil;
 import org.tensorflow.lite.support.common.TensorOperator;
 import org.tensorflow.lite.support.common.TensorProcessor;
 import org.tensorflow.lite.support.common.ops.NormalizeOp;
@@ -34,6 +36,7 @@ import org.tensorflow.lite.support.image.ImageProcessor;
 import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.support.image.ops.ResizeOp;
 import org.tensorflow.lite.support.image.ops.ResizeWithCropOrPadOp;
+import org.tensorflow.lite.support.label.TensorLabel;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
 import java.io.File;
@@ -41,7 +44,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ImageDisplayActivity extends AppCompatActivity {
 
@@ -53,7 +59,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
     protected Interpreter tflite;
     ImageView imageView;
 
-    TextView gametocytes_value, plasmodium_species_value,slideID,image_desc;
+    TextView gametocytes_value, plasmodium_species_value, slideID, image_desc;
     ImageButton closebtn, backBtn;
 
     private int imageSizeX;
@@ -69,6 +75,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
 
     private static Bitmap img_process_bitmap;
     private List<String> labels;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,15 +99,15 @@ public class ImageDisplayActivity extends AppCompatActivity {
 
         // Get the image file path or URI from the intent
         imagePath = getIntent().getStringExtra("IMAGE_PATH");
-        Integer image_id = getIntent().getIntExtra("IMAGE_ID",0);
-        Integer slide_age = getIntent().getIntExtra("AGE",0);
+        Integer image_id = getIntent().getIntExtra("IMAGE_ID", 0);
+        Integer slide_age = getIntent().getIntExtra("AGE", 0);
         String slide_id = getIntent().getStringExtra("SLIDE_ID");
         String slide_gender = getIntent().getStringExtra("GENDER");
         String site_name = getIntent().getStringExtra("SITE_NAME");
         DatabaseHelper db = new DatabaseHelper(ImageDisplayActivity.this);
 
-        slideID.setText("SlideID #: "+slide_id);
-        image_desc.setText("Info: "+ slide_gender + " - "+ slide_age+ "Yrs" +", " + site_name );
+        slideID.setText("SlideID #: " + slide_id);
+        image_desc.setText("Info: " + slide_gender + " - " + slide_age + "Yrs" + ", " + site_name);
         // Load the image into the ImageView using Glide or any other image loading library
         Glide.with(this)
                 .load(imagePath)
@@ -109,11 +116,9 @@ public class ImageDisplayActivity extends AppCompatActivity {
         try {
             tflite = new Interpreter(loadModelFile(this));
 
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
 
         analyebtn.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +136,6 @@ public class ImageDisplayActivity extends AppCompatActivity {
                 finish();
             }
         });
-
 
 
         delete_sample_btn.setOnClickListener(new View.OnClickListener() {
@@ -159,8 +163,8 @@ public class ImageDisplayActivity extends AppCompatActivity {
     }
 
 
-    private  void ProcessImage(View view){
-        if(imageView.getDrawable() != null){
+    private void ProcessImage(View view) {
+        if (imageView.getDrawable() != null) {
             int imageTensorIndex = 0;
             int[] imageShape = tflite.getInputTensor(imageTensorIndex).shape(); // {1, height, weight, 3}
             imageSizeX = imageShape[1];
@@ -182,6 +186,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
             inputImageBuffer = loadImageFromPath(imagePath);
             tflite.run(inputImageBuffer.getBuffer(), outputProbabilityBuffer.getBuffer().rewind());
 
+            showResults(this);
 
         } else {
             Snackbar.make(view, "Please Choose Image", Snackbar.LENGTH_SHORT).show();
@@ -189,7 +194,45 @@ public class ImageDisplayActivity extends AppCompatActivity {
     }
 
 
+    private void showResults(Activity activity) {
 
+        try {
+            labels = FileUtil.loadLabels(this, "labels.txt");
+
+            TensorBuffer tensorBuffer = probabilityProcessor.process(outputProbabilityBuffer);
+
+            // Assuming the last dimension corresponds to class labels
+            int height = tensorBuffer.getShape()[1];
+            int width = tensorBuffer.getShape()[2];
+
+            // Assuming you have a label mapping in the form of a List<String> called labels
+// and a TensorBuffer containing predictions called tensorBuffer
+
+            int batchSize = tensorBuffer.getShape()[0];
+            int numClasses = tensorBuffer.getShape()[1];
+
+            for (int batch = 0; batch < batchSize; batch++) {
+                for (int classIndex = 0; classIndex < numClasses; classIndex++) {
+                    // Access the value for the class prediction
+                    float prediction = tensorBuffer.getFloatValue(classIndex);
+
+                    // Get the label corresponding to the class index
+                    String label = labels.get(classIndex);
+
+                    // Log or print the label and the prediction
+                    Log.d("TensorBuffer", "Batch: " + batch + ", Label: " + label + ", Prediction: " + prediction * 100);
+                }
+            }
+
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 
     private TensorImage loadImageFromPath(String imagePath) {
@@ -227,7 +270,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
     }
 
 
-    private MappedByteBuffer loadModelFile(Activity activity)  throws IOException{
+    private MappedByteBuffer loadModelFile(Activity activity) throws IOException {
         AssetFileDescriptor fileDescriptor = activity.getAssets().openFd("best_float32.tflite");
         FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
         FileChannel fileChannel = inputStream.getChannel();
@@ -253,7 +296,6 @@ public class ImageDisplayActivity extends AppCompatActivity {
         track_dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         track_dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
-
 
 
 }
