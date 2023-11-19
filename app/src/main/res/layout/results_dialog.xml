@@ -33,7 +33,7 @@
         android:ellipsize="end"
         android:fontFamily="@font/poppinsbold"
         android:gravity="left"
-        android:text="Analytics Results"
+        android:text="Analyzed Image"
         android:textColor="@color/primary_color"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -41,57 +41,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/closebtn" />
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/plasmodium_layout"
+    <ImageView
+        android:id="@+id/image_result_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/smll_rounded_btn"
-        android:backgroundTint="@color/background_green"
-        android:paddingVertical="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="225dp"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/result_barrier">
-
-
-    <TextView
-        android:id="@+id/plasmodium_species_lable"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/poppinsregular"
-        android:gravity="left"
-        android:maxLines="2"
-        android:text="Plasmodium Species"
-        android:textColor="@color/primary_color"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:src="@drawable/malimagesize_default"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/title_text" />
 
 
-    <TextView
-        android:id="@+id/plasmodium_species_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/poppinsbold"
-        android:gravity="left"
-        android:maxLines="2"
-        android:text="40%"
-        android:textColor="@color/primary_color"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plasmodium_species_lable" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/gametocytes_layout"
         android:layout_width="match_parent"
@@ -103,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/plasmodium_layout">
+        app:layout_constraintTop_toBottomOf="@+id/image_result_view">
 
         <TextView
             android:id="@+id/gametocytes_lable"
@@ -115,27 +77,25 @@
             android:fontFamily="@font/poppinsregular"
             android:gravity="left"
             android:maxLines="2"
-            android:text="Gametocytes"
-            android:textColor="@color/primary_color"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:text="Process Time"
+            android:textColor="#6C6C6C"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/gametocytes_value"
+            android:id="@+id/process_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:ellipsize="end"
-            android:fontFamily="@font/poppinsbold"
+            android:fontFamily="@font/poppinsmedium"
             android:gravity="left"
             android:maxLines="2"
-            android:text="50%"
-            android:textColor="@color/primary_color"
-            android:textSize="25sp"
-            android:textStyle="bold"
+            android:text="Image Details"
+            android:textColor="#5E5E5E"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/gametocytes_lable" />

@@ -96,9 +96,11 @@ public class HomeFragment extends Fragment {
         mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
-                Intent intent = new Intent(getContext(), CropperActivity.class);
-                intent.putExtra("DATA", result.toString());
-                startActivityForResult(intent, 101);
+                if(result !=null){
+                    Intent intent = new Intent(getContext(), CropperActivity.class);
+                    intent.putExtra("DATA", result.toString());
+                    startActivityForResult(intent, 101);
+                }
 
             }
         });

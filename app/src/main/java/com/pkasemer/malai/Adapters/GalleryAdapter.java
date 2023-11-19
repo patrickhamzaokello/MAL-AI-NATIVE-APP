@@ -98,7 +98,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ItemView
 
 
     private void showImage(String imageFile, int id, int age, String slide_id, String gender, String site_name) {
-        Toast.makeText(context, "Image Clicked", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(context, ImageDisplayActivity.class);
         intent.putExtra("IMAGE_PATH", imageFile);
         intent.putExtra("IMAGE_ID", id);

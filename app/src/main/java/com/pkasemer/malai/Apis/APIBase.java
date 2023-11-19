@@ -19,74 +19,36 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
+
 public class APIBase {
 
-    private static final String HEADER_CACHE_CONTROL = "Cache-Control";
-    private static final String HEADER_PRAGMA = "Pragma";
     private static Retrofit retrofit = null;
 
-    private final static long CACHE_SIZE = 100 * 1024 * 1024; // 100MB Cache size
+    private final static long CACHE_SIZE = 100 * 1024 * 1024; // 10MB Cache size
 
     private static OkHttpClient buildClient(Context context) {
+        // Build interceptor
+        final Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = chain -> {
+            Request request = chain.request();
+                // If there is a network connection, set cache control for 30 seconds
+                request = request.newBuilder()
+                        .header("Cache-Control", "public, max-age=30")
+                        .build();
+
+            return chain.proceed(request);
+        };
 
         // Create Cache
         Cache cache = new Cache(context.getCacheDir(), CACHE_SIZE);
 
         return new OkHttpClient
                 .Builder()
-                .addInterceptor(offlineInterceptor(context))
-                .addNetworkInterceptor(networkInterceptor()) // only used when network is on
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)) // used if network off or on
+                .addNetworkInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .cache(cache)
                 .build();
     }
 
-
-
-    private static Interceptor offlineInterceptor(Context context){
-        return new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Log.d("interceptor", "offlineInterceptor called");
-
-                Request request = chain.request();
-                //prevent caching when network is on. for that we use the networkinterceptor
-
-                if (!NetworkReceiver.getNetworkStatus()) {
-                    CacheControl cacheControl = new CacheControl.Builder()
-                            .maxStale(7, TimeUnit.DAYS)
-                            .build();
-                    request = request.newBuilder()
-                            .removeHeader(HEADER_PRAGMA)
-                            .removeHeader(HEADER_CACHE_CONTROL)
-                            .cacheControl(cacheControl)
-                            .build();
-
-                }
-                Log.e("intercept", "network: " + NetworkReceiver.getNetworkStatus() );
-                return chain.proceed(request);
-            }
-        };
-    }
-
-    private static Interceptor networkInterceptor(){
-        return new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Log.d("interceptor", "networkinterceptor called");
-
-                Response response =  chain.proceed(chain.request());
-                CacheControl cacheControl = new CacheControl.Builder()
-                        .maxAge(30, TimeUnit.MINUTES)
-                        .build();
-                return response.newBuilder()
-                        .removeHeader(HEADER_PRAGMA)
-                        .removeHeader(HEADER_CACHE_CONTROL)
-                        .header(HEADER_CACHE_CONTROL, cacheControl.toString())
-                        .build();
-            }
-        };
-    }
 
 
     public static Retrofit getClient(Context context) {
@@ -94,14 +56,21 @@ public class APIBase {
             retrofit = new Retrofit.Builder()
                     .client(buildClient(context))
                     .addConverterFactory(GsonConverterFactory.create())
-//                    .baseUrl("http://192.168.0.130:8080/projects/MwonyaaApi/Requests/endpoints/")
-//                    .baseUrl("https://shop.mwonyaa.com/Requests/endpoints/")
                     .baseUrl("https://xyzobide.kakebeshop.com/mwonyaaAPI/Requests/endpoints/")
                     .build();
         }
         return retrofit;
     }
 
-
+    public static Retrofit getInferenceBase(Context context){
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .client(buildClient(context))
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl("https://kasfa.mwonya.com/")
+                    .build();
+        }
+        return retrofit;
+    }
 
 }
