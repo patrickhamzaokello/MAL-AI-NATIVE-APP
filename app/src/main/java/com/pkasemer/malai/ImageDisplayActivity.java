@@ -25,7 +25,6 @@ import com.pkasemer.malai.Database.DatabaseHelper;
 import com.pkasemer.malai.Models.InferenceModel;
 import com.pkasemer.malai.ViewModel.InferenceViewModel;
 
-import org.tensorflow.lite.Interpreter;
 
 import java.io.File;
 
@@ -40,7 +39,6 @@ public class ImageDisplayActivity extends AppCompatActivity {
 
 
     Dialog track_dialog;
-    protected Interpreter tflite;
     ImageView imageView,image_result_view;
 
     TextView process_value, slideID, image_desc;
