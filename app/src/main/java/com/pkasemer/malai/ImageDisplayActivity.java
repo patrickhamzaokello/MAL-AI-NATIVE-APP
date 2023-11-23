@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +35,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class ImageDisplayActivity extends AppCompatActivity {
+public class ImageDisplayActivity extends AppCompatActivity implements ProgressRequestBody.UploadCallbacks {
 
     LinearLayout analyebtn, delete_sample_btn;
     String imagePath;
@@ -46,6 +49,10 @@ public class ImageDisplayActivity extends AppCompatActivity {
 
     InferenceModel inference_back;
     InferenceViewModel inferenceViewModel;
+
+    private RelativeLayout progressLayout;
+    private ProgressBar progressBar;
+    private TextView percentageTextView;
 
 
     @Override
@@ -64,6 +71,9 @@ public class ImageDisplayActivity extends AppCompatActivity {
         ConstraintLayout dialog_background = track_dialog.findViewById(R.id.dialog_background);
         process_value = track_dialog.findViewById(R.id.process_value);
         image_result_view = track_dialog.findViewById(R.id.image_result_view);
+        progressLayout = track_dialog.findViewById(R.id.progressLayout);
+        progressBar = track_dialog.findViewById(R.id.progressBar);
+        percentageTextView = track_dialog.findViewById(R.id.percentageTextView);
 
         closebtn = track_dialog.findViewById(R.id.closebtn);
         slideID = findViewById(R.id.slideID);
@@ -85,8 +95,10 @@ public class ImageDisplayActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(ImageDisplayActivity.this, "Analysis Failed to Complete", Toast.LENGTH_SHORT).show();
                 }
+                progressLayout.setVisibility(View.GONE);
             }
         });
+        // Observe the progress of the image upload
 
         // Get the image file path or URI from the intent
         imagePath = getIntent().getStringExtra("IMAGE_PATH");
@@ -168,13 +180,33 @@ public class ImageDisplayActivity extends AppCompatActivity {
         track_dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         track_dialog.getWindow().setGravity(Gravity.BOTTOM);
 
+//        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
         File file = new File(ImagePath);
-//        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-        inferenceViewModel.makeApiCall(getApplicationContext(),body);
+        inferenceViewModel.makeApiCall(getApplicationContext(),file,this);
     }
 
 
+    @Override
+    public void onProgressUpdate(int percentage) {
+        progressLayout.setVisibility(View.VISIBLE);
+        progressBar.setProgress(percentage);
+        percentageTextView.setText( getString(R.string.progress_percentage, percentage));
+    }
+
+    @Override
+    public void onError() {
+        progressLayout.setVisibility(View.GONE);
+        progressBar.setProgress(0);
+        percentageTextView.setText( getString(R.string.progress_percentage, 0));
+    }
+
+    @Override
+    public void onFinish() {
+        progressLayout.setVisibility(View.VISIBLE);
+        progressBar.setProgress(100);
+        percentageTextView.setText( getString(R.string.progress_percentage, 100));
+    }
 }

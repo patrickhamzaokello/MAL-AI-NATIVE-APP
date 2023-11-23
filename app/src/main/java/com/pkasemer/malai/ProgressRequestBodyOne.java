@@ -1,8 +1,5 @@
 package com.pkasemer.malai;
 
-import android.os.Handler;
-import android.os.Looper;
-
 import java.io.IOException;
 
 import okhttp3.MediaType;
@@ -13,14 +10,12 @@ import okio.ForwardingSink;
 import okio.Okio;
 import okio.Sink;
 
-import okio.Timeout;
-
-public class ProgressRequestBody extends RequestBody {
+public class ProgressRequestBodyOne extends RequestBody {
 
     private final RequestBody requestBody;
     private final ProgressListener listener;
 
-    public ProgressRequestBody(RequestBody requestBody, ProgressListener listener) {
+    public ProgressRequestBodyOne(RequestBody requestBody, ProgressListener listener) {
         this.requestBody = requestBody;
         this.listener = listener;
     }
