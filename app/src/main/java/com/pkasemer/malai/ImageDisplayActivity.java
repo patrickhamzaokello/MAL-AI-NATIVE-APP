@@ -35,7 +35,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class ImageDisplayActivity extends AppCompatActivity implements ProgressRequestBody.UploadCallbacks {
+public class ImageDisplayActivity extends AppCompatActivity {
 
     LinearLayout analyebtn, delete_sample_btn;
     String imagePath;
@@ -96,6 +96,17 @@ public class ImageDisplayActivity extends AppCompatActivity implements ProgressR
                     Toast.makeText(ImageDisplayActivity.this, "Analysis Failed to Complete", Toast.LENGTH_SHORT).show();
                 }
                 progressLayout.setVisibility(View.GONE);
+            }
+        });
+
+        inferenceViewModel.getProgressValueDataObserver().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+               if(integer != null){
+                   progressLayout.setVisibility(View.VISIBLE);
+                   progressBar.setProgress(integer);
+                   percentageTextView.setText( getString(R.string.progress_percentage, integer));
+               }
             }
         });
         // Observe the progress of the image upload
@@ -185,28 +196,8 @@ public class ImageDisplayActivity extends AppCompatActivity implements ProgressR
         File file = new File(ImagePath);
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-        inferenceViewModel.makeApiCall(getApplicationContext(),file,this);
+        inferenceViewModel.makeApiCall(getApplicationContext(),file);
     }
 
 
-    @Override
-    public void onProgressUpdate(int percentage) {
-        progressLayout.setVisibility(View.VISIBLE);
-        progressBar.setProgress(percentage);
-        percentageTextView.setText( getString(R.string.progress_percentage, percentage));
-    }
-
-    @Override
-    public void onError() {
-        progressLayout.setVisibility(View.GONE);
-        progressBar.setProgress(0);
-        percentageTextView.setText( getString(R.string.progress_percentage, 0));
-    }
-
-    @Override
-    public void onFinish() {
-        progressLayout.setVisibility(View.VISIBLE);
-        progressBar.setProgress(100);
-        percentageTextView.setText( getString(R.string.progress_percentage, 100));
-    }
 }

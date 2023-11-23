@@ -24,17 +24,41 @@ import retrofit2.Response;
 public class InferenceViewModel extends ViewModel  {
 
     private final MutableLiveData<InferenceModel> inferenceData = new MutableLiveData<>();
+    private final MutableLiveData<Integer> progressValue = new MutableLiveData<>();
 
 
     public MutableLiveData<InferenceModel> getInferenceDataObserver() {
         return inferenceData;
     }
+    public MutableLiveData<Integer> getProgressValueDataObserver() {
+        return progressValue;
+    }
 
+    public void makeApiCall(Context context, File file) {
 
-    public void makeApiCall(Context context, File file, final ProgressRequestBody.UploadCallbacks listener) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+        ProgressRequestBody progressRequestBody = new ProgressRequestBody(file, new ProgressRequestBody.UploadCallbacks() {
+            @Override
+            public void onProgressUpdate(int percentage) {
+                // Update your UI with the upload progress
+                progressValue.postValue(percentage);
+            }
+
+            @Override
+            public void onError() {
+                // Handle error
+                progressValue.postValue(0);
+            }
+
+            @Override
+            public void onFinish() {
+                // Upload finished
+                progressValue.postValue(100);
+            }
+        });
+
         // Create the custom ProgressRequestBody
-        ProgressRequestBody fileBody = new ProgressRequestBody(file, listener);
-        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), fileBody);
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", file.getName(), progressRequestBody);
         // Create the API service
         ApiEndPoints apiEndPoints = APIBase.getInferenceBase(context).create(ApiEndPoints.class);
 
